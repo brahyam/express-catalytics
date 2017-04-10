@@ -27,6 +27,26 @@ class ProductService {
       }
     )
   }
+
+  find(query) {
+    return new Promise(
+      function (resolve, reject) {
+
+        if (!query) {
+          var query = {};
+        }
+
+        ProductModel.find(query, function (err, products) {
+          if (err) {
+            reject(err);
+          }
+          else {
+            resolve(products);
+          }
+        });
+      }
+    )
+  }
 }
 
 module.exports = new ProductService();

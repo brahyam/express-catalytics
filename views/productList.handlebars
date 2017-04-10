@@ -1,18 +1,28 @@
-
-<div class="alert alert-success" role="alert">{{message}}</div>
-
-<table style="width:100%">
-    <tr>
-        <th>Product</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Quantity</th>
-    </tr>
-
-    {{findAllProducts}}
-
-    <tr>
-
-    </tr>
-
-</table>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <tr>
+                <th>Product</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Quantity</th>
+            </tr>
+            {{#each products}}
+                <tr>
+                    <td>
+                        {{name}}
+                    </td>
+                    <td>
+                        {{description}}
+                    </td>
+                    <td>
+                        {{price}}
+                    </td>
+                    <td>
+                        {{quantity}}
+                    </td>
+                </tr>
+            {{/each}}
+        </table>
+    </div>
+</div>

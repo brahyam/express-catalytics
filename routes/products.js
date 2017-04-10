@@ -5,7 +5,14 @@ const router = express.Router();
 
 /* GET products listing. */
 router.get('/', function (req, res, next) {
-  res.render('productList');
+  productService.find()
+    .then(products => {
+      winston.debug('GET /products: retrieved ' + products.length + ' products');
+      res.render('productList', {products: products});
+    })
+    .catch(err => {
+      res.render('error', {message: 'error listing products:' + err});
+    });
 });
 
 router.get('/create', function (req, res, next) {

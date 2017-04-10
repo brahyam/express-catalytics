@@ -14,6 +14,8 @@ const handlebars = expressHandlebars.create({
   defaultLayout: 'main.handlebars'
 });
 
+winston.level = process.env.LOG_LEVEL || 'info';
+
 var index = require('./routes/index');
 var users = require('./routes/users');
 var products = require('./routes/products');
