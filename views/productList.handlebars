@@ -6,6 +6,7 @@
                 <th>Description</th>
                 <th>Price</th>
                 <th>Quantity</th>
+                <th>Actions</th>
             </tr>
             {{#each products}}
                 <tr>
@@ -20,6 +21,9 @@
                     </td>
                     <td>
                         {{quantity}}
+                    </td>
+                    <td>
+                        <a class="btn btn-link" href="/products/edit/{{_id}}">Edit</a>
                     </td>
                 </tr>
             {{/each}}

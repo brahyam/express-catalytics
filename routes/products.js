@@ -44,4 +44,10 @@ router.post('/', function (req, res, next) {
     });
 });
 
+router.get('/edit/:id', function (req, res, next) {
+  var productId = req.params.id;
+  winston.debug('GET /edit. editing product:' + productId);
+  res.render('createProduct');
+});
+
 module.exports = router;
