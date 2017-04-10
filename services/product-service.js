@@ -32,11 +32,15 @@ class ProductService {
     return new Promise(
       function (resolve, reject) {
 
+        var newQuery;
         if (!query) {
-          var query = {};
+          newQuery = {};
+        }
+        else {
+          newQuery = query;
         }
 
-        ProductModel.find(query, function (err, products) {
+        ProductModel.find(newQuery, function (err, products) {
           if (err) {
             reject(err);
           }
