@@ -51,6 +51,25 @@ class ProductService {
       }
     )
   }
+
+    delete(product) {
+        return new Promise(
+            function (resolve, reject) {
+
+                product.delete(function (err, product) {
+                    if (err) {
+                        // Failed to delete
+                        reject(err);
+                    }
+                    else {
+                        resolve(product);
+                    }
+                });
+            }
+        )
+    }
+
 }
+
 
 module.exports = new ProductService();
