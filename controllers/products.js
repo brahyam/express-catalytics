@@ -15,11 +15,7 @@ exports.findAllProducts = function (req, res) {
 //GET - Return a product with specified ID
 exports.findById = function (req, res) {
     product.findById(req.params.id, function (err, product) {
-        if (err) return res.send(500.
-        err.message
-        )
-        ;
-
+      if (err) return res.send(500);
         console.log('GET /product/' + req.params.id);
         res.status(200).jsonp(product);
     });
