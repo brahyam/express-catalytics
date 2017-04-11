@@ -7,6 +7,10 @@ const winston = require('winston');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const moongose = require('mongoose');
+const passport = require('passport');
+const flash = require('connect-flash');
+const session = require('express-session');
+
 const expressHandlebars = require('express-handlebars');
 const handlebars = expressHandlebars.create({
   layoutsDir: __dirname + '/views/layouts',
@@ -19,11 +23,14 @@ winston.level = process.env.LOG_LEVEL || 'info';
 var index = require('./routes/index');
 var users = require('./routes/users');
 var products = require('./routes/products');
+var authentication = require('./routes/authentication');
 
 var app = express();
 
 // db setup
 moongose.connect(process.env.MONGODB_URI);
+
+// require('./config/passport')(passport);
 
 // view engine setup
 app.engine('handlebars', handlebars.engine);
@@ -31,14 +38,21 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'handlebars');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// session config
+app.use(session({secret: process.env.SESSION_SECRET || 'ILoveMartha'}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
 app.use('/', index);
+app.use('/', authentication);
 app.use('/users', users);
 app.use('/products', products);
 
